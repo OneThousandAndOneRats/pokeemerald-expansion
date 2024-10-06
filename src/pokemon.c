@@ -1110,6 +1110,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     u8 availableIVs[NUM_STATS];
     u8 selectedIvs[LEGENDARY_PERFECT_IV_COUNT];
     bool32 isShiny;
+    bool32 isDelta;
+    u16 deltaType;
 
     ZeroBoxMonData(boxMon);
 
@@ -1172,6 +1174,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         }
     }
 
+    isDelta = (Random() % 2) >1;
+    deltaType = Random() % NUMBER_OF_MON_TYPES;
+
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
     SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);
 
@@ -1193,6 +1198,8 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     value = ITEM_POKE_BALL;
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
+    SetBoxMonData(boxMon, MON_DATA_DELTA_TYPE, &deltaType);
+    SetBoxMonData(boxMon, MON_DATA_IS_DELTA, &isDelta);
 
     if (fixedIV < USE_RANDOM_IVS)
     {
@@ -2796,6 +2803,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 retVal = substruct0->teraType;
             }
             break;
+        case MON_DATA_DELTA_TYPE:
+            retVal = substruct0->deltaType;
+            break;
         case MON_DATA_EVOLUTION_TRACKER:
             evoTracker.asField.a = substruct1->evolutionTracker1;
             evoTracker.asField.b = substruct1->evolutionTracker2;
@@ -2833,6 +2843,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             break;
         case MON_DATA_SANITY_IS_EGG:
             retVal = boxMon->isEgg;
+            break;
+        case MON_DATA_IS_DELTA:
+            retVal = substruct3->isDelta;
             break;
         case MON_DATA_OT_NAME:
         {
@@ -3227,6 +3240,13 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             substruct0->teraType = teraType;
             break;
         }
+        case MON_DATA_DELTA_TYPE:
+        {
+            u32 deltaType;
+            SET8(deltaType);
+            substruct0->deltaType = deltaType;
+            break;
+        }
         case MON_DATA_EVOLUTION_TRACKER:
         {
             union EvolutionTracker evoTracker;
@@ -3272,6 +3292,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_SANITY_IS_EGG:
             SET8(boxMon->isEgg);
+            break;
+        case MON_DATA_IS_DELTA:
+            SET8(substruct3->isDelta);
             break;
         case MON_DATA_OT_NAME:
         {

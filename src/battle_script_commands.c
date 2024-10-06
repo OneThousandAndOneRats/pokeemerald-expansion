@@ -15061,6 +15061,7 @@ static void Cmd_handleballthrow(void)
             switch (gLastUsedItem)
             {
             case ITEM_ULTRA_BALL:
+            case ITEM_POKE_BALL:
                 ballMultiplier = 200;
                 break;
             case ITEM_SPORT_BALL:
