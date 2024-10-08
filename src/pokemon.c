@@ -1112,6 +1112,7 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     bool32 isShiny;
     bool32 isDelta;
     u16 deltaType;
+    u16 teraType;
 
     ZeroBoxMonData(boxMon);
 
@@ -1174,8 +1175,10 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
         }
     }
 
-    isDelta = (Random() % 2) >1;
-    deltaType = Random() % NUMBER_OF_MON_TYPES;
+    isDelta = TRUE;
+//    isDelta = Random() % 2;
+    deltaType = GenerateRandomDeltaType(species);
+    teraType = GenerateRandomDeltaType(species);
 
     SetBoxMonData(boxMon, MON_DATA_PERSONALITY, &personality);
     SetBoxMonData(boxMon, MON_DATA_OT_ID, &value);
@@ -1198,7 +1201,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, 
     value = ITEM_POKE_BALL;
     SetBoxMonData(boxMon, MON_DATA_POKEBALL, &value);
     SetBoxMonData(boxMon, MON_DATA_OT_GENDER, &gSaveBlock2Ptr->playerGender);
+
     SetBoxMonData(boxMon, MON_DATA_DELTA_TYPE, &deltaType);
+    SetBoxMonData(boxMon, MON_DATA_TERA_TYPE, &teraType);
     SetBoxMonData(boxMon, MON_DATA_IS_DELTA, &isDelta);
 
     if (fixedIV < USE_RANDOM_IVS)
@@ -2788,21 +2793,26 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_GIGANTAMAX_FACTOR:
             retVal = substruct3->gigantamaxFactor;
             break;
-        case MON_DATA_TERA_TYPE:
-            if (gSpeciesInfo[substruct0->species].forceTeraType)
-            {
-                retVal = gSpeciesInfo[substruct0->species].forceTeraType;
-            }
-            else if (substruct0->teraType == TYPE_NONE) // Tera Type hasn't been modified so we can just use the personality
-            {
-                const u8 *types = gSpeciesInfo[substruct0->species].types;
-                retVal = (boxMon->personality & 0x1) == 0 ? types[0] : types[1];
-            }
-            else
-            {
-                retVal = substruct0->teraType;
-            }
+        case MON_DATA_IS_DELTA:
+            retVal = substruct3->isDelta;
             break;
+        case MON_DATA_TERA_TYPE:
+            retVal = substruct0->teraType;
+            break;
+//            if (gSpeciesInfo[substruct0->species].forceTeraType)
+//            {
+//                retVal = gSpeciesInfo[substruct0->species].forceTeraType;
+//            }
+//            else if (substruct0->teraType == TYPE_NONE) // Tera Type hasn't been modified so we can just use the personality
+//            {
+//                const u8 *types = gSpeciesInfo[substruct0->species].types;
+//                retVal = (boxMon->personality & 0x1) == 0 ? types[0] : types[1];
+//            }
+//            else
+//            {
+//                retVal = substruct0->teraType;
+//            }
+//            break;
         case MON_DATA_DELTA_TYPE:
             retVal = substruct0->deltaType;
             break;
@@ -2843,9 +2853,6 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             break;
         case MON_DATA_SANITY_IS_EGG:
             retVal = boxMon->isEgg;
-            break;
-        case MON_DATA_IS_DELTA:
-            retVal = substruct3->isDelta;
             break;
         case MON_DATA_OT_NAME:
         {
@@ -3233,6 +3240,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         case MON_DATA_GIGANTAMAX_FACTOR:
             SET8(substruct3->gigantamaxFactor);
             break;
+        case MON_DATA_IS_DELTA:
+            SET8(substruct3->isDelta);
+            break;
         case MON_DATA_TERA_TYPE:
         {
             u32 teraType;
@@ -3292,9 +3302,6 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_SANITY_IS_EGG:
             SET8(boxMon->isEgg);
-            break;
-        case MON_DATA_IS_DELTA:
-            SET8(substruct3->isDelta);
             break;
         case MON_DATA_OT_NAME:
         {
@@ -3672,6 +3679,7 @@ void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex)
 
 void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
 {
+    DebugPrintf("TO BATTLE MON");
     s32 i;
     u8 nickname[POKEMON_NAME_BUFFER_SIZE];
 
@@ -3680,6 +3688,9 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
         dst->moves[i] = GetMonData(src, MON_DATA_MOVE1 + i, NULL);
         dst->pp[i] = GetMonData(src, MON_DATA_PP1 + i, NULL);
     }
+
+    bool32 isDelta = GetMonData(src, MON_DATA_IS_DELTA, NULL);
+    DebugPrintf("isDelta result %d", isDelta);
 
     dst->species = GetMonData(src, MON_DATA_SPECIES, NULL);
     dst->item = GetMonData(src, MON_DATA_HELD_ITEM, NULL);
@@ -3704,8 +3715,10 @@ void PokemonToBattleMon(struct Pokemon *src, struct BattlePokemon *dst)
     dst->spDefense = GetMonData(src, MON_DATA_SPDEF, NULL);
     dst->abilityNum = GetMonData(src, MON_DATA_ABILITY_NUM, NULL);
     dst->otId = GetMonData(src, MON_DATA_OT_ID, NULL);
-    dst->type1 = gSpeciesInfo[dst->species].types[0];
-    dst->type2 = gSpeciesInfo[dst->species].types[1];
+    dst->type1 = isDelta ? GetMonData(src, MON_DATA_DELTA_TYPE, NULL): gSpeciesInfo[dst->species].types[0];
+    DebugPrintf("type one %u", dst->type1);
+    dst->type2 = isDelta ? GetMonData(src, MON_DATA_TERA_TYPE, NULL): gSpeciesInfo[dst->species].types[1];
+    DebugPrintf("type two %u", dst->type2);
     dst->type3 = TYPE_MYSTERY;
     dst->isShiny = IsMonShiny(src);
     dst->ability = GetAbilityBySpecies(dst->species, dst->abilityNum);
@@ -6834,7 +6847,7 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
 
     bool32 isShiny = GetBoxMonData(boxMon, MON_DATA_IS_SHINY, NULL);
     u32 hiddenNature = GetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, NULL);
-    u32 teraType = GetBoxMonData(boxMon, MON_DATA_TERA_TYPE, NULL);
+//    u32 teraType = GetBoxMonData(boxMon, MON_DATA_TERA_TYPE, NULL);
 
     old = *boxMon;
     old0 = &(GetSubstruct(&old, old.personality, 0)->type0);
@@ -6858,7 +6871,7 @@ void UpdateMonPersonality(struct BoxPokemon *boxMon, u32 personality)
 
     SetBoxMonData(boxMon, MON_DATA_IS_SHINY, &isShiny);
     SetBoxMonData(boxMon, MON_DATA_HIDDEN_NATURE, &hiddenNature);
-    SetBoxMonData(boxMon, MON_DATA_TERA_TYPE, &teraType);
+//    SetBoxMonData(boxMon, MON_DATA_TERA_TYPE, &teraType);
 }
 
 void HealPokemon(struct Pokemon *mon)
@@ -6962,4 +6975,17 @@ void UpdateDaysPassedSinceFormChange(u16 days)
             }
         }
     }
+}
+
+u16 GenerateRandomDeltaType(u16 species)
+{
+    u16 deltaType = (Random() % (NUMBER_OF_MON_TYPES-2) +1);
+    const u8 *types = gSpeciesInfo[species].types;
+
+    while (deltaType == TYPE_MYSTERY || deltaType == TYPE_NONE || deltaType == TYPE_STELLAR || deltaType == types[0] || deltaType == types[1]) {
+        deltaType = (Random() % (NUMBER_OF_MON_TYPES-2) +1);
+//        DebugPrintf("Delta Type while loop random %u", deltaType);
+    }
+//    return deltaType;
+    return TYPE_GHOST;
 }

@@ -3942,19 +3942,27 @@ static void SetMonTypeIcons(void)
     }
     else
     {
-//        SetTypeSpritePosAndPal(gSpeciesInfo[summary->species].types[0], 120, 48, SPRITE_ARR_ID_TYPE);
-        SetTypeSpritePosAndPal(summary->deltaType, 120, 48, SPRITE_ARR_ID_TYPE);
-//        if (gSpeciesInfo[summary->species].types[0] != gSpeciesInfo[summary->species].types[1])
-        if (summary->deltaType != summary->teraType)
-        {
-//            SetTypeSpritePosAndPal(gSpeciesInfo[summary->species].types[1], 160, 48, SPRITE_ARR_ID_TYPE + 1);
-            SetTypeSpritePosAndPal(summary->teraType, 160, 48, SPRITE_ARR_ID_TYPE + 1);
-            SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 1, FALSE);
+        if(summary->isDelta) {
+            SetTypeSpritePosAndPal(summary->deltaType, 120, 48, SPRITE_ARR_ID_TYPE);
+            if (summary->deltaType != summary->teraType)
+            {
+                SetTypeSpritePosAndPal(summary->teraType, 160, 48, SPRITE_ARR_ID_TYPE + 1);
+                SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 1, FALSE);
+            }
+            else
+            {
+                SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 1, TRUE);
+            }
+        } else {
+            SetTypeSpritePosAndPal(gSpeciesInfo[summary->species].types[0], 120, 48, SPRITE_ARR_ID_TYPE);
+            if (gSpeciesInfo[summary->species].types[0] != gSpeciesInfo[summary->species].types[1]) {
+                SetTypeSpritePosAndPal(gSpeciesInfo[summary->species].types[1], 160, 48, SPRITE_ARR_ID_TYPE + 1);
+                SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 1, FALSE);
+            } else {
+                SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 1, TRUE);
+            }
         }
-        else
-        {
-            SetSpriteInvisibility(SPRITE_ARR_ID_TYPE + 1, TRUE);
-        }
+
         if (P_SHOW_TERA_TYPE >= GEN_9)
         {
             SetTypeSpritePosAndPal(summary->teraType, 200, 48, SPRITE_ARR_ID_TYPE + 2);
