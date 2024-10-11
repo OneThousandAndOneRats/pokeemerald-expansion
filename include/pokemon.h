@@ -345,6 +345,10 @@ struct BattlePokemon
     /*0x55*/ u32 otId;
     /*0x59*/ u8 metLevel;
     /*0x5A*/ bool8 isShiny;
+    /*0x5B*/ bool8 isDelta;
+    /*0x5C*/ u8 deltaType1;
+    /*0x5D*/ u8 deltaType2;
+
 };
 
 struct Evolution

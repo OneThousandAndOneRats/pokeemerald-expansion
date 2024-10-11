@@ -1606,6 +1606,13 @@ static u32 GetBattlerMonData(u32 battler, struct Pokemon *party, u32 monId, u8 *
         GetMonData(&party[monId], MON_DATA_NICKNAME, nickname);
         StringCopy_Nickname(battleMon.nickname, nickname);
         GetMonData(&party[monId], MON_DATA_OT_NAME, battleMon.otName);
+        battleMon.isDelta = GetMonData(&party[monId], MON_DATA_IS_DELTA, NULL);
+        battleMon.deltaType1 = GetMonData(&party[monId], MON_DATA_DELTA_TYPE, NULL);
+        DebugPrintf("in battlemon 1 %u", battleMon.type1);
+        battleMon.deltaType2 = GetMonData(&party[monId], MON_DATA_TERA_TYPE, NULL);
+        DebugPrintf("in battlemon 2 %u", battleMon.type1);
+
+
         src = (u8 *)&battleMon;
         for (size = 0; size < sizeof(battleMon); size++)
             dst[size] = src[size];

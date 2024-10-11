@@ -6986,6 +6986,5 @@ u16 GenerateRandomDeltaType(u16 species)
         deltaType = (Random() % (NUMBER_OF_MON_TYPES-2) +1);
 //        DebugPrintf("Delta Type while loop random %u", deltaType);
     }
-//    return deltaType;
-    return TYPE_GHOST;
+    return deltaType;
 }
