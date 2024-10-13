@@ -2026,6 +2026,18 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 u32 data = partyData[i].teraType;
                 SetMonData(&party[i], MON_DATA_TERA_TYPE, &data);
             }
+            if (partyData[i].deltaType > 0)
+            {
+                u32 isDelta = TRUE;
+                SetMonData(&party[i], MON_DATA_IS_DELTA, &isDelta);
+
+                u32 data = partyData[i].deltaType;
+                SetMonData(&party[i], MON_DATA_DELTA_TYPE, &data);
+            } else
+            {
+                u32 data = FALSE;
+                SetMonData(&party[i], MON_DATA_IS_DELTA, &data);
+            }
             CalculateMonStats(&party[i]);
 
             if (B_TRAINER_CLASS_POKE_BALLS >= GEN_7 && ball == -1)
