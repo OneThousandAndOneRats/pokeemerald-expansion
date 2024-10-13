@@ -2021,18 +2021,16 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer 
                 u32 data = partyData[i].gigantamaxFactor;
                 SetMonData(&party[i], MON_DATA_GIGANTAMAX_FACTOR, &data);
             }
-            if (partyData[i].teraType > 0)
-            {
-                u32 data = partyData[i].teraType;
-                SetMonData(&party[i], MON_DATA_TERA_TYPE, &data);
-            }
             if (partyData[i].deltaType > 0)
             {
                 u32 isDelta = TRUE;
                 SetMonData(&party[i], MON_DATA_IS_DELTA, &isDelta);
 
-                u32 data = partyData[i].deltaType;
-                SetMonData(&party[i], MON_DATA_DELTA_TYPE, &data);
+                u32 deltaType = partyData[i].deltaType;
+                SetMonData(&party[i], MON_DATA_DELTA_TYPE, &deltaType);
+
+                u32 teraType = partyData[i].teraType > 0 ? partyData[i].teraType : deltaType;
+                SetMonData(&party[i], MON_DATA_TERA_TYPE, &teraType);
             } else
             {
                 u32 data = FALSE;
