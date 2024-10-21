@@ -8288,12 +8288,14 @@ F_TRAINER_FEMALE |
         .party = (const struct TrainerMon[])
         {
             {
-            .species = SPECIES_GEODUDE,
+            .species = SPECIES_GOLEM,
             .gender = TRAINER_MON_RANDOM_GENDER,
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
             .lvl = 12,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_ROCK,
+            .teraType = TYPE_PSYCHIC,
             .moves = {
                 MOVE_TACKLE,
                 MOVE_DEFENSE_CURL,
@@ -8308,6 +8310,8 @@ F_TRAINER_FEMALE |
             .lvl = 12,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_ROCK,
+            .teraType = TYPE_GRASS,
             .moves = {
                 MOVE_TACKLE,
                 MOVE_DEFENSE_CURL,
@@ -8323,6 +8327,8 @@ F_TRAINER_FEMALE |
             .lvl = 15,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_PSYCHIC,
+            .teraType = TYPE_GRASS,
             .moves = {
                 MOVE_BLOCK,
                 MOVE_HARDEN,
@@ -8346,12 +8352,14 @@ F_TRAINER_FEMALE |
         .party = (const struct TrainerMon[])
         {
             {
-            .species = SPECIES_MACHOP,
+            .species = SPECIES_MACHAMP,
             .gender = TRAINER_MON_RANDOM_GENDER,
             .iv = TRAINER_PARTY_IVS(12, 12, 12, 12, 12, 12),
             .lvl = 16,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_FIGHTING,
+            .teraType = TYPE_ROCK,
             .moves = {
                 MOVE_KARATE_CHOP,
                 MOVE_LOW_KICK,
@@ -8366,6 +8374,8 @@ F_TRAINER_FEMALE |
             .lvl = 16,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_FIGHTING,
+            .teraType = TYPE_DARK,
             .moves = {
                 MOVE_FOCUS_PUNCH,
                 MOVE_LIGHT_SCREEN,
@@ -8381,6 +8391,8 @@ F_TRAINER_FEMALE |
             .lvl = 19,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_ROCK,
+            .teraType = TYPE_DARK,
             .moves = {
                 MOVE_ARM_THRUST,
                 MOVE_VITAL_THROW,
@@ -8404,12 +8416,14 @@ F_TRAINER_FEMALE |
         .party = (const struct TrainerMon[])
         {
             {
-            .species = SPECIES_VOLTORB,
+            .species = SPECIES_ELECTRODE,
             .gender = TRAINER_MON_RANDOM_GENDER,
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
             .lvl = 20,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_ELECTRIC,
+            .teraType = TYPE_GRASS,
             .moves = {
                 MOVE_ROLLOUT,
                 MOVE_SPARK,
@@ -8424,6 +8438,8 @@ F_TRAINER_FEMALE |
             .lvl = 20,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_ELECTRIC,
+            .teraType = TYPE_GRASS,
             .moves = {
                 MOVE_SHOCK_WAVE,
                 MOVE_LEER,
@@ -8438,6 +8454,8 @@ F_TRAINER_FEMALE |
             .lvl = 22,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_ELECTRIC,
+            .teraType = TYPE_FLYING,
             .moves = {
                 MOVE_SUPERSONIC,
                 MOVE_SHOCK_WAVE,
@@ -8453,6 +8471,8 @@ F_TRAINER_FEMALE |
             .lvl = 24,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_GRASS,
+            .teraType = TYPE_FLYING,
             .moves = {
                 MOVE_QUICK_ATTACK,
                 MOVE_THUNDER_WAVE,
@@ -8483,6 +8503,8 @@ F_TRAINER_FEMALE |
             .lvl = 24,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_FIRE,
+            .teraType = TYPE_WATER,
             .moves = {
                 MOVE_OVERHEAT,
                 MOVE_TAKE_DOWN,
@@ -8491,12 +8513,14 @@ F_TRAINER_FEMALE |
             },
             },
             {
-            .species = SPECIES_SLUGMA,
+            .species = SPECIES_MAGCARGO,
             .gender = TRAINER_MON_RANDOM_GENDER,
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
             .lvl = 24,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_FIRE,
+            .teraType = TYPE_FIGHTING,
             .moves = {
                 MOVE_OVERHEAT,
                 MOVE_SMOG,
@@ -8511,6 +8535,8 @@ F_TRAINER_FEMALE |
             .lvl = 26,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_FIRE,
+            .teraType = TYPE_FLYING,
             .moves = {
                 MOVE_OVERHEAT,
                 MOVE_TACKLE,
@@ -8526,6 +8552,8 @@ F_TRAINER_FEMALE |
             .lvl = 29,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_WATER,
+            .teraType = TYPE_GROUND,
             .moves = {
                 MOVE_OVERHEAT,
                 MOVE_SUNNY_DAY,
@@ -8555,6 +8583,8 @@ F_TRAINER_FEMALE |
             .lvl = 27,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_NORMAL,
+            .teraType = TYPE_GHOST,
             .moves = {
                 MOVE_TEETER_DANCE,
                 MOVE_PSYBEAM,
@@ -8569,6 +8599,8 @@ F_TRAINER_FEMALE |
             .lvl = 27,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_NORMAL,
+            .teraType = TYPE_PSYCHIC,
             .moves = {
                 MOVE_SLASH,
                 MOVE_FACADE,
@@ -8577,12 +8609,14 @@ F_TRAINER_FEMALE |
             },
             },
             {
-            .species = SPECIES_LINOONE,
+            .species = SPECIES_OBSTAGOON,
             .gender = TRAINER_MON_RANDOM_GENDER,
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
             .lvl = 29,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_NORMAL,
+            .teraType = TYPE_DARK,
             .moves = {
                 MOVE_SLASH,
                 MOVE_BELLY_DRUM,
@@ -8598,6 +8632,8 @@ F_TRAINER_FEMALE |
             .lvl = 31,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_GHOST,
+            .teraType = TYPE_FIGHTING,
             .moves = {
                 MOVE_COUNTER,
                 MOVE_YAWN,
@@ -8622,12 +8658,14 @@ F_TRAINER_FEMALE |
         .party = (const struct TrainerMon[])
         {
             {
-            .species = SPECIES_SWABLU,
+            .species = SPECIES_ALTARIA,
             .gender = TRAINER_MON_RANDOM_GENDER,
             .iv = TRAINER_PARTY_IVS(25, 25, 25, 25, 25, 25),
             .lvl = 29,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_FLYING,
+            .teraType = TYPE_GROUND,
             .moves = {
                 MOVE_PERISH_SONG,
                 MOVE_MIRROR_MOVE,
@@ -8642,6 +8680,8 @@ F_TRAINER_FEMALE |
             .lvl = 29,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_FLYING,
+            .teraType = TYPE_STEEL,
             .moves = {
                 MOVE_SUNNY_DAY,
                 MOVE_AERIAL_ACE,
@@ -8656,6 +8696,8 @@ F_TRAINER_FEMALE |
             .lvl = 30,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_FLYING,
+            .teraType = TYPE_GROUND,
             .moves = {
                 MOVE_WATER_GUN,
                 MOVE_SUPERSONIC,
@@ -8670,6 +8712,8 @@ F_TRAINER_FEMALE |
             .lvl = 31,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_STEEL,
+            .teraType = TYPE_GROUND,
             .moves = {
                 MOVE_SAND_ATTACK,
                 MOVE_FURY_ATTACK,
@@ -8685,6 +8729,8 @@ F_TRAINER_FEMALE |
             .lvl = 33,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_DRAGON,
+            .teraType = TYPE_STEEL,
             .moves = {
                 MOVE_EARTHQUAKE,
                 MOVE_DRAGON_BREATH,
@@ -8714,6 +8760,8 @@ F_TRAINER_FEMALE |
             .lvl = 41,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_PSYCHIC,
+            .teraType = TYPE_FIGHTING,
             .moves = {
                 MOVE_EARTHQUAKE,
                 MOVE_ANCIENT_POWER,
@@ -8728,6 +8776,8 @@ F_TRAINER_FEMALE |
             .lvl = 41,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_PSYCHIC,
+            .teraType = TYPE_NORMAL,
             .moves = {
                 MOVE_PSYCHIC,
                 MOVE_SUNNY_DAY,
@@ -8743,6 +8793,8 @@ F_TRAINER_FEMALE |
             .lvl = 42,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_FIGHTING,
+            .teraType = TYPE_DARK,
             .moves = {
                 MOVE_LIGHT_SCREEN,
                 MOVE_PSYCHIC,
@@ -8758,6 +8810,8 @@ F_TRAINER_FEMALE |
             .lvl = 42,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_NORMAL,
+            .teraType = TYPE_FIRE,
             .moves = {
                 MOVE_SUNNY_DAY,
                 MOVE_SOLAR_BEAM,
@@ -8787,6 +8841,8 @@ F_TRAINER_FEMALE |
             .lvl = 41,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_WATER,
+            .teraType = TYPE_ELECTRIC,
             .moves = {
                 MOVE_WATER_PULSE,
                 MOVE_ATTRACT,
@@ -8801,6 +8857,8 @@ F_TRAINER_FEMALE |
             .lvl = 41,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_WATER,
+            .teraType = TYPE_GRASS,
             .moves = {
                 MOVE_RAIN_DANCE,
                 MOVE_WATER_PULSE,
@@ -8809,12 +8867,14 @@ F_TRAINER_FEMALE |
             },
             },
             {
-            .species = SPECIES_SEALEO,
+            .species = SPECIES_WALREIN,
             .gender = TRAINER_MON_RANDOM_GENDER,
             .iv = TRAINER_PARTY_IVS(24, 24, 24, 24, 24, 24),
             .lvl = 43,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_WATER,
+            .teraType = TYPE_STEEL,
             .moves = {
                 MOVE_ENCORE,
                 MOVE_BODY_SLAM,
@@ -8829,6 +8889,8 @@ F_TRAINER_FEMALE |
             .lvl = 43,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_WATER,
+            .teraType = TYPE_FIRE,
             .moves = {
                 MOVE_WATER_PULSE,
                 MOVE_CRABHAMMER,
@@ -8844,6 +8906,8 @@ F_TRAINER_FEMALE |
             .lvl = 46,
             .nature = NATURE_HARDY,
             .dynamaxLevel = MAX_DYNAMAX_LEVEL,
+            .deltaType = TYPE_DRAGON,
+            .teraType = TYPE_GRASS,
             .moves = {
                 MOVE_WATER_PULSE,
                 MOVE_DOUBLE_TEAM,
