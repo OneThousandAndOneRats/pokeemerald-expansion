@@ -216,6 +216,7 @@ static void TrySetBattlerShadowSpriteCallback(u32 battler)
     if (gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary].callback == SpriteCallbackDummy)
     {
         if (B_ENEMY_MON_SHADOW_STYLE <= GEN_3
+            || P_GBA_STYLE_SPECIES_GFX == TRUE
             || gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdSecondary].callback == SpriteCallbackDummy)
         {
             SetBattlerShadowSpriteCallback(battler, GetMonData(&gEnemyParty[gBattlerPartyIndexes[battler]], MON_DATA_SPECIES));
@@ -550,9 +551,6 @@ static void OpponentHandleChooseMove(u32 battler)
             case AI_CHOICE_FLEE:
                 BtlController_EmitTwoReturnValues(battler, BUFFER_B, B_ACTION_RUN, 0);
                 break;
-            case AI_CHOICE_SWITCH:
-                BtlController_EmitTwoReturnValues(battler, BUFFER_B, 10, 0xFFFF);
-                break;
             case 6:
                 BtlController_EmitTwoReturnValues(battler, BUFFER_B, 15, gBattlerTarget);
                 break;
@@ -688,7 +686,11 @@ static void OpponentHandleChoosePokemon(u32 battler)
                  || chosenMonId == gBattlerPartyIndexes[battler2])
                     continue;
                 if ((AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_ACE_POKEMON)
-                 && ((chosenMonId != CalculateEnemyPartyCount() - 1) || CountAIAliveNonEggMonsExcept(PARTY_SIZE) == pokemonInBattle))
+                 && ((chosenMonId == CalculateEnemyPartyCountInSide(battler) - 1) || CountAIAliveNonEggMonsExcept(PARTY_SIZE) == pokemonInBattle))
+                    continue;
+                if ((AI_THINKING_STRUCT->aiFlags[battler] & AI_FLAG_DOUBLE_ACE_POKEMON)
+                 && (((chosenMonId == CalculateEnemyPartyCountInSide(battler) - 1) || (chosenMonId == CalculateEnemyPartyCountInSide(battler) - 2))
+                 || (CountAIAliveNonEggMonsExcept(PARTY_SIZE) == pokemonInBattle || CountAIAliveNonEggMonsExcept(PARTY_SIZE-1) == pokemonInBattle)))
                     continue;
                 // mon is valid
                 break;
