@@ -596,7 +596,7 @@ bool8 IsBattleSEPlaying(u8 battler)
 
 void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
 {
-    u32 monsPersonality, currentPersonality, isShiny, species, paletteOffset, position;
+    u32 monsPersonality, currentPersonality, isShiny, species, paletteOffset, position, isDelta;
     const void *lzPaletteData;
     struct Pokemon *illusionMon = GetIllusionMonPtr(battler);
     if (illusionMon != NULL)
@@ -607,6 +607,7 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
 
     monsPersonality = GetMonData(mon, MON_DATA_PERSONALITY);
     isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+    isDelta = GetMonData(mon, MON_DATA_IS_DELTA);
 
     if (gBattleSpritesDataPtr->battlerData[battler].transformSpecies == SPECIES_NONE)
     {
@@ -674,6 +675,12 @@ void BattleLoadMonSpriteGfx(struct Pokemon *mon, u32 battler)
     if (GetActiveGimmick(battler) == GIMMICK_TERA)
     {
         BlendPalette(paletteOffset, 16, 8, GetTeraTypeRGB(GetBattlerTeraType(battler)));
+        CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZEOF(16));
+    }
+
+    if (isDelta)
+    {
+        BlendPalette(paletteOffset, 16, 8, GetTeraTypeRGB(GetMonData(mon, MON_DATA_DELTA_TYPE)));
         CpuCopy32(gPlttBufferFaded + paletteOffset, gPlttBufferUnfaded + paletteOffset, PLTT_SIZEOF(16));
     }
 }
