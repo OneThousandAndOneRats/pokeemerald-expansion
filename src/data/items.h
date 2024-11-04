@@ -605,6 +605,21 @@ const struct Item gItemsInfo[] =
         .iconPalette = gItemIconPalette_CherishBall,
     },
 
+    [ITEM_DELTA_BALL] =
+        {
+            .name = _("Delta Ball"),
+            .price = 1000,
+            .description = COMPOUND_STRING(
+                "Works well if\n"
+                "used on a\n"
+                "delta pokemon."),
+            .pocket = POCKET_POKE_BALLS,
+            .type = ITEM_USE_BAG_MENU,
+            .battleUsage = EFFECT_ITEM_THROW_BALL,
+            .secondaryId = BALL_DELTA,
+            .iconPic = gItemIcon_DeltaBall,
+            .iconPalette = gItemIconPalette_DeltaBall,
+        },
 // Medicine
 
     [ITEM_POTION] =
