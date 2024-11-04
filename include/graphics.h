@@ -63,6 +63,8 @@ extern const u32 gBallGfx_Beast[];
 extern const u32 gBallPal_Beast[];
 extern const u32 gBallGfx_Cherish[];
 extern const u32 gBallPal_Cherish[];
+extern const u32 gBallGfx_Delta[];
+extern const u32 gBallPal_Delta[];
 extern const u32 gOpenPokeballGfx[];
 
 // Pokémon gfx
